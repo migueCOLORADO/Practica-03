@@ -1,0 +1,52 @@
+LENGUAJES Y PARADIGMAS
+
+
+Analizador sintactico
+
+Es un metodo que tiene el compilador de c++ para leer lo que se programa. En la realidad todo lo que hacemos los programadores es texto; este texto lo analiza a travez de cierta gramatica, el texto y ejecuta segun las instrucciones que interprete. 
+
+Arbol de turnos 
+Un orden de nodos, es muy sencillo. No es un arbol binario. Es mas que un arbol navideño que cualquier cosa
+
+La practica se puede realizar en python, en java o en c++.
+
+Cuando usted va a crear un programa debe de fijarse ne la gramatica. Esto se llama BNF.}
+
+Hay que buscar sobre la notacion SAN.
+
+
+Recomendaciones | Practica 03
+1. Trabaje con la libreria PyQT en pythin o QTCreator en C++.
+2. Lea los repositorios de estos lenguajes.
+
+Buscar canal: Canal de Narva
+Buscar libros: Regular Expressions Cookbook
+
+Expresiones Regulares | Sirve para validar cadenas de caracteres | Es un lenguaje de patrones que sirve para analizar patrones en cadenas de caracteres | ¿Por que aprenderlas? Herramientas de busqueda muy podesoras que sirven para 
+
+Metacaracteres, son simbolos especiales que activan funciones de busqueda especificos. Reducen considerablemente las lineas de codigo a escribir.
+
+Nota | Existe una alta probabilidad matematica de que algo de ello caiga en el parcial 03
+
+Esto es uno de los temas mas importantes que van a servir para las entevistas de trabajo.
+
+Nota | Ahora mismo lo que esta mandando la parada es MCP, así que estudielo.
+
+Nota | Buscate web scraping y ETL's.
+
+Nota | Para la practica 03, debes aprender a manipular la libreria PyQT de python que trabaja con interfaces | Hay muchos recursos, pero puedes ver los videos que narvaez compartio en su canal (Son muy buenos y muestran muy bien como realizar cada cos}}
+
+
+
+
+
+
+.
+
+
+
+
+
+
+
++      
