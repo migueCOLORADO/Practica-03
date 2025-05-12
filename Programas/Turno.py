@@ -1,5 +1,5 @@
 from typing import Optional
-from Jugada import Jugada
+from jugada import Jugada
 
 class Turno:
     def __init__(self, numero: int, blanca: Jugada, negra: Optional[Jugada] = None):
