@@ -9,9 +9,12 @@ Chismoso y el te guiara a la luz...
     
     texto = str(input("Ingrese el SAN de la Partida de Ajedrez: "))
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     texto = "1. e4 e5 2. Nf3 Nc6 3. Bb5 a6" 
     parser = ParserSAN(texto)
 =======
+=======
+>>>>>>> Stashed changes
     parser = Parser(texto)
 >>>>>>> Stashed changes
     partida = parser.parse(texto)
