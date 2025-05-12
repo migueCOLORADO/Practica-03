@@ -1,29 +1,30 @@
 from parser import ParserSAN       # Importamos librerias
 
 def get_san_from_user() -> str:
-    """
-    Permite al usuario ingresar los movimientos en SAN.
-    El usuario puede ingresar varias líneas; para finalizar, ingrese una línea vacía.
-    """
-    print("Introduce los movimientos de la partida en notación SAN.")
+    print("""
+| ¡BIENVENIDO AL CHISMOSO DE PARTIDAS DE AJEDREZ! |
+| DESCRIPCIÓN | Este es un modelo avanzado en Chismografia que te sapea si hicieron Trampa \n
+o la Cagaron en una partida de Ajedrez. Tu solo encargate de darle el SAN de la Partida al \n
+Chismoso, que este te guiara a la luz|""")
+    
     lineas = []
     while True:
-        linea = input()
+        linea = input("""| Ingreso de la descripcion SAN de la Partida: """)
+        print(f"Si ya ingreso el SAN, dele click 2 veces a la tecla 'Enter' ")
+        
         if linea.strip() == "":
             break
+        
         lineas.append(linea.strip())
     # Unir todas las líneas con espacios
     return ' '.join(lineas)
-print("""
-| ¡BIENVENIDO AL CHISMOSO DE PARTIDAS DE AJEDREZ! |
-| DESCRIPCIÓN | Este modelo te ayuda a validar partidas en notación SAN. |
-""")
+
+
 # Obtener SAN del usuario
 texto = get_san_from_user()
 parser = ParserSAN(texto)
 try:
         partida = parser.parse()
-        print("Partida parseada correctamente:")
-        print(partida)
+        print(f"La partida fue parseada correctamente: {partida}")
 except ValueError as e:
         print(f"Error al parsear la partida: {e}")
