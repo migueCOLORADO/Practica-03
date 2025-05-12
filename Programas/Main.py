@@ -1,4 +1,4 @@
-from parse import Parser        # Importamos librerias
+from parser import ParserSAN       # Importamos librerias
 
 if __name__ == '__main__':      # Ejecutamos todos los metodos
     print(f"""| ¡BIENVENIDO AL CHISMOSO DE PARTIDAS DE AJEDREZ! | \n
@@ -9,6 +9,6 @@ Chismoso y el te guiara a la luz...
     
     texto = str(input("Ingrese el SAN de la Partida de Ajedrez: "))
     texto = "1. e4 e5 2. Nf3 Nc6 3. Bb5 a6" 
-    parser = Parser(texto)
+    parser = ParserSAN(texto)
     partida = parser.parse(texto)
     print(partida)

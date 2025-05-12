@@ -1,8 +1,8 @@
 import re
 from typing import List
-from Jugada import Jugada
-from Turno import Turno
-from Partida import Partida
+from jugada import Jugada
+from turno import Turno
+from partida import Partida
 
 class ParserSAN:
     RE_ENROQUE = re.compile(r'^(O-O|O-O-O)([+#])?$')
