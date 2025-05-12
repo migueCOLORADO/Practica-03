@@ -4,7 +4,7 @@ from jugada import Jugada
 from turno import Turno
 from partida import Partida
 
-class ParserSAN:
+class Parser:
     RE_ENROQUE = re.compile(r'^(O-O|O-O-O)([+#])?$')
     RE_MOV_PIEZA = re.compile(r'^[KQRBN](?:[a-h]|[1-8]|[a-h][1-8])?x?[a-h][1-8](?:=[KQRBN])?[+#]?$')
     RE_MOV_PEON_AVANCE = re.compile(r'^[a-h][1-8](?:=[KQRBN])?[+#]?$')

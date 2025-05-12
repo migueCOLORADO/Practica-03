@@ -1,21 +1,15 @@
-from parser import ParserSAN       # Importamos librerias
+from parser import Parser
 
-if __name__ == '__main__':      # Ejecutamos todos los metodos
-    print(f"""| ¡BIENVENIDO AL CHISMOSO DE PARTIDAS DE AJEDREZ! | \n
-| DESCRIPCION | Este es un modelo de Chismografia avanzado que te sapea si se hizo Trampa \n
-o la Cagaron en una partidad de Ajedrez. Tu solo encargate de darle el SAN de la partida al \n
-Chismoso y el te guiara a la luz...
-""")
-    
-    texto = str(input("Ingrese el SAN de la Partida de Ajedrez: "))
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-    texto = "1. e4 e5 2. Nf3 Nc6 3. Bb5 a6" 
-    parser = ParserSAN(texto)
-=======
-=======
->>>>>>> Stashed changes
+def main():
+    texto = input("Ingrese la partida en notacion SAN: ")
     parser = Parser(texto)
->>>>>>> Stashed changes
-    partida = parser.parse(texto)
-    print(partida)
+    try:
+        partida = parser.parse()
+        print("Partida parseada correctamente:")
+        print(partida)
+    except ValueError as e:
+        print(f"Error al parsear la partida: {e}")
+
+if __name__ == '__main__':
+    main()
+
