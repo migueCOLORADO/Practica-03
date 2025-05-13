@@ -3,9 +3,10 @@
 1. [Introducción](#introducción)
 2. [Descripción](#descripción)
 3. [Funcionalidades](#funcionalidades)
-4. [Video](#video-presentación-del-código)
-5. [Repositorio](#link-del-repositorio)
-6. [Autores](#autores)
+4. [Herramientas](#herramientas)
+5. [Video](#video-presentación-del-código)
+6. [Repositorio](#link-del-repositorio)
+7. [Autores](#autores)
 
 ## Introduccion
 <div style = "text-align: justify;">
@@ -17,6 +18,13 @@ El programa está... (No terminado... por ahora)
 ## Funcionalidades
 
 (Algunas muy bonitas otras mas complejas, quien sabe. Algun dia seran diseñadas).
+
+## Herramientas
+
+- Lenguaje Usado: Python.
+- IDEs: Visual Estudio Code y PyCharm
+- Interprete: Python 3.13
+
 
 ## Video Presentación del Código
 [Video - Sustentacion]()
