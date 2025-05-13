@@ -1,5 +1,5 @@
 from typing import List
-from turno import Turno
+from Turno import Turno
 
 class Partida:
     def __init__(self, turnos: List[Turno]):
