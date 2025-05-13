@@ -1,8 +1,8 @@
 import re
 from typing import List
 from jugada import Jugada
-from turno import Turno
-from partida import Partida
+from Turno import Turno
+from Partida import Partida
 
 class ParserSAN:
     # Expresiones regulares para cada producción SAN
