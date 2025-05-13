@@ -1,4 +1,4 @@
-from Parser import ParserSAN       # Importamos librerias
+from parser import ParserSAN       # Importamos librerias
 
 def get_san_from_user() -> str:
     """
