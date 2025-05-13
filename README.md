@@ -10,14 +10,26 @@
 
 ## Introduccion
 <div style = "text-align: justify;">
-Esta es una práctica estudiantil, cuyo objetivo es crear... (Warning!! Obra en Construccion)
+Esta es una práctica estudiantil, cuyo objetivo es crear, a través del Lenguaje de Programación Python, un software que nos permita determinar si en una partida de ajederez se hacen movimientos ilegales o por el contrario, todos sus movimientos son validos.
 
 ## Descripción
-El programa está... (No terminado... por ahora)
+Este programa en Python valida partidas de ajedrez en notación algebraica estándar (SAN) usando expresiones regulares y nos muestra cuales jugadas son ilegales (si aplica).
 
 ## Funcionalidades
 
-(Algunas muy bonitas otras mas complejas, quien sabe. Algun dia seran diseñadas).
+1. Validación sintáctica básica:
+   - Reconoce movimientos válidos de piezas ejemplo: peones (e4), enroques (O-O), y capturas (exd5).
+   - Rechaza movimientos con formato incorrecto ejemplo: (e9, Pxe4).
+   
+2. Programacion orientada a objetos:
+   - Representa la partida como objetos (Partida, Turno, Jugada).
+   - Organiza los turnos secuencialmente (ej: 1. e4 e5 2. Nf3).
+
+3. Manejo de errores:
+
+   - Detecta jugadas ilegales (ej: e9) y lanza excepciones.
+   - Detecta errores (si los hay) en la notacion SAN mal escrita y manda excepciones.
+
 
 ## Herramientas
 
