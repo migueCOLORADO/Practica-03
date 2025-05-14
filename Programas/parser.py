@@ -1,8 +1,8 @@
 import re
 from typing import List, Optional
 from jugada import Jugada
-from Turno import Turno
-from Partida import Partida
+from turno import Turno
+from partida import Partida
 
 class ParserSAN:
     # Expresiones regulares para validación
