@@ -158,4 +158,9 @@ class VisualizadorAjedrez:
         # Configuración final
         self.ax.set_title("Árbol Binario de Partida de Ajedrez", pad=20, fontsize=14)
         self.ax.axis('off')
-        plt.tight_layout()
+        self.fig.subplots_adjust(
+            left=0.05,
+            right=0.95,
+            top=0.9,
+            bottom=0.2  # Ajusta según el tamaño de tus botones
+        )
