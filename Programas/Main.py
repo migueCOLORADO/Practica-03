@@ -1,29 +1,42 @@
-from Parser import ParserSAN
+from parser import ParserSAN
+from visualizador import VisualizadorAjedrez
 
-def get_san_from_user() -> str:
-    """
-    Permite al usuario ingresar los movimientos en SAN.
-    El usuario puede ingresar varias líneas; para finalizar, ingrese una línea vacía.
-    """
-    print("Introduce los movimientos de la partida en notación SAN.")
+def obtener_san_usuario():
+    
+    print("""\n| INSTRUCCIONES | Ingrese la partida en notación SAN (ej: 1. e4 e5 2. Nf3 Nc6)""")
+    print("| Cuando termines, presiona Enter dos veces\n")
+    
     lineas = []
     while True:
-        linea = input()
-        if linea.strip() == "":
+        linea = input("Ingrese línea de movimientos: ").strip()
+        if not linea:
             break
-        lineas.append(linea.strip())
-    # Unir todas las líneas con espacios
+        lineas.append(linea)
+    
     return ' '.join(lineas)
-print("""
-| ¡BIENVENIDO AL CHISMOSO DE PARTIDAS DE AJEDREZ! |
-| DESCRIPCIÓN | Este modelo te ayuda a validar partidas en notación SAN. |
-""")
-# Obtener SAN del usuario
-texto = get_san_from_user()
-parser = ParserSAN(texto)
-try:
+
+def main():
+    # Creamos un mensaje default
+    print("""| ¡BIENVENIDO AL CHISMOSO DE PARTIDAS DE AJEDREZ! | \n| DESCRIPCIÓN | Este es un modelo avanzado en Chismografia que te sapea si hicieron Trampa \no la Cagaron en una partida de Ajedrez. Tu solo encargate de darle el SAN de la Partida al \nChismoso, que este te guiara a la luz |""")          
+    
+    try:
+        # 1. Obtener entrada
+        texto = obtener_san_usuario()
+        
+        # 2. Parsear
+        print(f"| ALERTA | Inicializando parseado y verificacion de Partida |\n| Analizando partida...")
+        
+        parser = ParserSAN(texto)
         partida = parser.parse()
-        print("Partida parseada correctamente:")
-        print(partida)
-except ValueError as e:
-        print(f"Error al parsear la partida: {e}")
+        movimientos = parser.obtenerElementos()
+        print(f"\n| ALERTA | Partida procesada exitosamente: {partida} \n| INFO | No es por afirma ni por confirmar pero, \n no hubo ningun error o movimiento ilegal encontrado")
+        
+        # 3. Visualizar
+        visor = VisualizadorAjedrez(partida, movimientos)
+        visor.mostrar_arbol()
+        
+    except Exception as e:
+        print(f"\n| ERROR | {str(e)}")
+
+if __name__ == "__main__":
+    main()

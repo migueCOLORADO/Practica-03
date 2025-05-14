@@ -8,5 +8,4 @@ class Turno:
         self.negra = negra
 
     def __repr__(self):
-        return f"Turno(numero={self.numero}, blanca={self.blanca}, negra={self.negra})"
-
+        return f"Turno({self.numero}: {self.blanca} | {self.negra})"

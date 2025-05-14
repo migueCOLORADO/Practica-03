@@ -6,4 +6,4 @@ class Partida:
         self.turnos = turnos
 
     def __repr__(self):
-        return f"Partida(turnos={self.turnos})"
+        return f"Partida({len(self.turnos)} turnos)"

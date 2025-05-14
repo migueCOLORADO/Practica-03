@@ -1,95 +1,82 @@
 import re
-from typing import List
+from typing import List, Optional
 from jugada import Jugada
 from Turno import Turno
 from Partida import Partida
 
 class ParserSAN:
-    # Expresiones regulares para cada producción SAN
-    RE_ENROQUE = re.compile(r'^(O-O|O-O-O)([+#])?$')
-    RE_MOV_PIEZA = re.compile(
-        r'^(?P<pieza>[KQRBN])'                       # Pieza
-        r'(?P<desambiguacion>([a-h]|[1-8]|[a-h][1-8]))?'  # Desambiguación opcional (letra | número | letra+número)
-        r'(?P<captura>x)?'                            # Captura opcional
-        r'(?P<destino>[a-h][1-8])'                    # Casilla destino
-        r'(?:=(?P<promocion>[KQRBN]))?'               # Promoción opcional
-        r'(?P<check>[+#])?$'                          # Jaque/mate opcional
-    )
-    RE_MOV_PEON_AVANCE = re.compile(
-        r'^(?P<destino>[a-h][1-8])'                   # Casilla de avance
-        r'(?:=(?P<promocion>[KQRBN]))?'               # Promoción opcional
-        r'(?P<check>[+#])?$'                          # Jaque/mate opcional
-    )
-    RE_MOV_PEON_CAPTURA = re.compile(
-        r'^(?P<origen>[a-h])'                         # Columna origen
-        r'x'                                         # Captura
-        r'(?P<destino>[a-h][1-8])'                   # Casilla destino
-        r'(?:=(?P<promocion>[KQRBN]))?'               # Promoción opcional
-        r'(?P<check>[+#])?$'                          # Jaque/mate opcional
-    )
-    # Resultado final de la partida (opcional): 1-0, 0-1, 1/2-1/2
-    RE_RESULT = re.compile(r'^(1-0|0-1|1/2-1/2)$')
+    # Expresiones regulares para validación
+    RE_ENROQUE = re.compile(r'^(O-O|O-O-O)(\+|#)?$')
+    RE_PIEZA = re.compile(r'^[KQRBN][a-h]?[1-8]?x?[a-h][1-8](=[QRBN])?(\+|#)?$')
+    RE_PEON_AVANCE = re.compile(r'^[a-h][1-8](=[QRBN])?(\+|#)?$')
+    RE_PEON_CAPTURA = re.compile(r'^[a-h]x[a-h][1-8](=[QRBN])?(\+|#)?$')
+    RE_TURNO = re.compile(r'^\d+\.$')
 
     def __init__(self, texto_partida: str):
-        # Filtrar comentarios y anotaciones (p.ej. ; ... o {...}) si los hubiera
-        limpio = re.sub(r"\{[^}]*\}|;[^\n]*", "", texto_partida)
-        self.tokens = limpio.split()
+        self.texto = texto_partida
+        self.tokens = texto_partida.split()
         self.pos = 0
+        self.turno_esperado = 1
+        
+    def obtenerElementos(self):
+        return self.texto
 
-    def parse(self) -> Partida:
+    def parse(self) -> Partida:        
         turnos: List[Turno] = []
-        while self.pos < len(self.tokens):
-            token = self.tokens[self.pos]
-            # si encontramos un resultado final, lo saltamos y terminamos
-            if self.RE_RESULT.match(token):
-                break
-            turno = self._parse_turno()
-            turnos.append(turno)
-        return Partida(turnos)
+        try:
+            while self.pos < len(self.tokens):
+                turno = self._parse_turno()
+                turnos.append(turno)
+                self.turno_esperado += 1
+            return Partida(turnos)
+        except ValueError as e:
+            raise ValueError(f"Error en posición {self.pos}: {str(e)}")
 
     def _parse_turno(self) -> Turno:
+        # Validar número de turno
         token_num = self._next_token()
-        if not token_num.endswith('.') or not token_num[:-1].isdigit():
-            raise ValueError(f"Turno mal formado: '{token_num}' (se espera '<número>.')")
+        if not self.RE_TURNO.match(token_num):
+            raise ValueError(f"Formato de turno inválido: '{token_num}'")
+        
         numero = int(token_num[:-1])
-        if numero < 1:
-            raise ValueError(f"Número de turno inválido: {numero} (debe ser >= 1)")
+        if numero != self.turno_esperado:
+            raise ValueError(f"Turno fuera de secuencia: esperado {self.turno_esperado}, obtenido {numero}")
 
-        jug_blanca = Jugada(self._parse_jugada())
+        # Parsear jugada blanca
+        jug_blanca = self._parse_jugada()
+        
+        # Parsear jugada negra
         jug_negra = None
-
-        if self.pos < len(self.tokens):
-            siguiente = self.tokens[self.pos]
-            # si no es número de turno ni resultado, interpretamos jugada negra
-            if not siguiente.endswith('.') and not self.RE_RESULT.match(siguiente):
-                jug_negra = Jugada(self._parse_jugada())
+        if self.pos < len(self.tokens) and not self.RE_TURNO.match(self.tokens[self.pos]):
+            jug_negra = self._parse_jugada()
 
         return Turno(numero, jug_blanca, jug_negra)
 
-    def _parse_jugada(self) -> str:
+    def _parse_jugada(self) -> Jugada:
         token = self._next_token()
-        if (self._es_enroque(token)
-            or self._es_movimiento_pieza(token)
-            or self._es_mov_peon_avance(token)
-            or self._es_mov_peon_captura(token)):
-            return token
-        raise ValueError(f"Jugada inválida: '{token}'")
+        
+        if self._es_enroque(token):
+            return Jugada(token)
+        elif self._es_movimiento_pieza(token):
+            return Jugada(token)
+        elif self._es_mov_peon(token):
+            return Jugada(token)
+        
+        raise ValueError(f"Movimiento inválido: '{token}'")
 
     def _es_enroque(self, token: str) -> bool:
         return bool(self.RE_ENROQUE.match(token))
 
     def _es_movimiento_pieza(self, token: str) -> bool:
-        return bool(self.RE_MOV_PIEZA.match(token))
+        return bool(self.RE_PIEZA.match(token))
 
-    def _es_mov_peon_avance(self, token: str) -> bool:
-        return bool(self.RE_MOV_PEON_AVANCE.match(token))
-
-    def _es_mov_peon_captura(self, token: str) -> bool:
-        return bool(self.RE_MOV_PEON_CAPTURA.match(token))
+    def _es_mov_peon(self, token: str) -> bool:
+        return (bool(self.RE_PEON_AVANCE.match(token)) or 
+                bool(self.RE_PEON_CAPTURA.match(token)))
 
     def _next_token(self) -> str:
         if self.pos >= len(self.tokens):
-            raise ValueError("Entrada incompleta: se esperaba más datos")
+            raise ValueError("Fin inesperado de la entrada")
         token = self.tokens[self.pos]
         self.pos += 1
         return token
