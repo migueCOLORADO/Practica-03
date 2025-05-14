@@ -1,4 +1,4 @@
-from Parser import ParserSAN
+from parser import ParserSAN
 from visualizador import VisualizadorAjedrez
 
 def obtener_san_usuario():
@@ -8,6 +8,7 @@ def obtener_san_usuario():
     
     lineas = []
     while True:
+
         linea = input("Ingrese línea de movimientos: ").strip()
         if not linea:
             break
