@@ -2,18 +2,22 @@ from parser import ParserSAN
 from visualizador import VisualizadorAjedrez
 
 def obtener_san_usuario():
-    
     print("""\n| INSTRUCCIONES | Ingrese la partida en notación SAN (ej: 1. e4 e5 2. Nf3 Nc6)""")
     print("| Cuando termines, presiona Enter dos veces\n")
-    
-    lineas = []
-    while True:
 
-        linea = input("Ingrese línea de movimientos: ").strip()
+    lineas = []
+    # Primera lectura con prompt explícito
+    primera = input("Ingrese línea de movimientos: ").strip()
+    if primera:
+        lineas.append(primera)
+
+    # Luego, solo lecturas “silenciosas” hasta línea vacía
+    while True:
+        linea = input().strip()
         if not linea:
             break
         lineas.append(linea)
-    
+
     return ' '.join(lineas)
 
 def main():
@@ -41,3 +45,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
