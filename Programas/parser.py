@@ -5,7 +5,6 @@ from turno import Turno
 from partida import Partida
 
 class ParserSAN:
-    # Expresiones regulares para validación
     RE_ENROQUE = re.compile(r'^(O-O|O-O-O)(\+|#)?$')
     RE_PIEZA = re.compile(r'^[KQRBN][a-h]?[1-8]?x?[a-h][1-8](=[QRBN])?(\+|#)?$')
     RE_PEON_AVANCE = re.compile(r'^[a-h][1-8](=[QRBN])?(\+|#)?$')
@@ -21,7 +20,7 @@ class ParserSAN:
     def obtenerElementos(self):
         return self.texto
 
-    def parse(self) -> Partida:        
+    def parse(self) -> Partida:
         turnos: List[Turno] = []
         try:
             while self.pos < len(self.tokens):
