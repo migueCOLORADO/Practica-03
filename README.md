@@ -39,7 +39,7 @@ Este programa en Python valida partidas de ajedrez en notación algebraica está
 
 
 ## Video Presentación del Código
-[Video - Sustentacion]()
+[Video - Sustentacion](https://eafit.sharepoint.com/:v:/s/proyectosEafit/EWm-M7yDY1ZGnbdLUazUOMsBqj2q84B_j75jkZn-5sOQ3g?e=9A5m1o&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D)
 
 ## Link del Repositorio
 [Practica - 03](https://github.com/migueCOLORADO/Practica-03.git)
